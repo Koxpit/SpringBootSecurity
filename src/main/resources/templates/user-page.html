@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+        <p class="navbar-brand text-white">
+            <b><span class="align-middle" th:utext="${user.getUsername()}"></span></b>
+            <span class="align-middle">with roles:</span>
+            <span class="align-middle" th:utext="${user.getRolesString()}"></span>
+        </p>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="btn btn-dark text-secondary">Logout</button>
+        </form>
+    </div>
+</nav>
+
+<div class="row mb-3">
+    <div class="col-md-2 themed-grid-col">User</div>
+    <div class="col-md-10 themed-grid-col">
+        <div class="pb-3">
+            <p>User information page</p>
+        </div>
+        <div class="col-md-12 themed-grid-col">
+            <div class="pb-3">
+                <p>About user</p>
+            </div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Role</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td th:utext="${user.getId()}">ID</td>
+                    <td th:utext="${user.getFirstName()}">FirstName</td>
+                    <td th:utext="${user.getLastName()}">LastName</td>
+                    <td th:utext="${user.getEmail()}">Email</td>
+                    <td th:each="role : ${user.getAuthorities()}"><span th:utext="${role.getAuthority().toString()}">Role</span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
